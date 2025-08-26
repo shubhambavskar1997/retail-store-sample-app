@@ -105,11 +105,25 @@ resource "null_resource" "argocd_apps" {
   depends_on = [time_sleep.wait_for_argocd]
   
   provisioner "local-exec" {
-    command = <<-EOT
-      echo "Deploying ArgoCD projects and applications..."
-      kubectl apply -n ${var.argocd_namespace} -f ${path.module}/../argocd/projects/
-      kubectl apply -n ${var.argocd_namespace} -f ${path.module}/../argocd/applications/
-      echo "ArgoCD applications deployed successfully!"
+    interpreter = ["PowerShell", "-Command"]
+    command     = <<-EOT
+      Write-Host "Starting ArgoCD application deployment..."
+      
+      # Convert paths to Windows format
+      $projectsPath = "${replace(path.module, "/", "\\")}\\..\\argocd\\projects"
+      $applicationsPath = "${replace(path.module, "/", "\\")}\\..\\argocd\\applications"
+      
+      # Apply projects if directory exists
+      if (Test-Path $projectsPath) {
+        kubectl apply -n ${var.argocd_namespace} -f $projectsPath
+      }
+      
+      # Apply applications if directory exists
+      if (Test-Path $applicationsPath) {
+        kubectl apply -n ${var.argocd_namespace} -f $applicationsPath
+      }
+      
+      Write-Host "ArgoCD applications deployed successfully!"
     EOT
   }
   
