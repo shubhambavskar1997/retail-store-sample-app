@@ -1,7 +1,7 @@
 # AWS Containers Retail Sample - UI Service
 
 <!-- GitOps Test: Testing deploy-simple.yml workflow -->
-<!--Test commit-->
+<!--Test commit1-->
 
 | Language | Persistence |
 | -------- | ----------- |

@@ -1,7 +1,7 @@
 # AWS Containers Retail Sample - Catalog Service
 
 <!-- GitOps Test: Final workflow validation -->
-<!--Test commit-->
+<!--Test commit1-->
 
 | Language | Persistence |
 | -------- | ----------- |
