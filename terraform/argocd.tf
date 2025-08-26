@@ -106,7 +106,7 @@ resource "null_resource" "argocd_apps" {
   
   provisioner "local-exec" {
     command = <<-EOT
-      echo "Deploying ArgoCD projects and applications..."
+      echo "Deploying ArgoCD Projects and applications..."
       kubectl apply -n ${var.argocd_namespace} -f ${path.module}/../argocd/projects/
       kubectl apply -n ${var.argocd_namespace} -f ${path.module}/../argocd/applications/
       echo "ArgoCD applications deployed successfully!"
